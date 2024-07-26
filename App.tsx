@@ -1,15 +1,20 @@
-import {StatusBar} from 'expo-status-bar';
-import {StyleSheet, Text, View} from 'react-native';
-import {RootStoreProvider} from "./config/RootStoreProvider";
+import {StatusBar, StyleSheet} from 'react-native';
+import {CategoriesScreen} from "./screens/CategoriesScreen";
+import {AppProvider} from "./config/AppProvider";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import {MealDetailScreen} from "./screens/MealDetailScreen";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
     return (
-        <RootStoreProvider>
-            <View style={styles.container}>
-                <Text>Open up App.tsx to start working on your app!</Text>
-                <StatusBar style="auto"/>
-            </View>
-        </RootStoreProvider>
+        <AppProvider>
+            <StatusBar barStyle="light-content"/>
+            <Stack.Navigator initialRouteName="Categories">
+                <Stack.Screen name="Categories" component={CategoriesScreen}/>
+                <Stack.Screen name="Details" component={MealDetailScreen}/>
+            </Stack.Navigator>
+        </AppProvider>
     );
 }
 
